@@ -25,7 +25,7 @@ LV_IMG_DECLARE(LSID_1_btn8);
 LV_IMG_DECLARE(LSID_1_guide);
 LV_IMG_DECLARE(LSID_1_btn_quit);
 LV_IMG_DECLARE(LSID_2_btn_back);
-LV_IMG_DECLARE(LSID_1_btn_hello);
+
 /* Sample program object */
 static lsid_sample_app_t *app_obj = NULL;
 
@@ -45,60 +45,6 @@ static void *allocate_memory(size_t size)
 
 	return mem;
 }
-
-
-
-
-/** Quit button callback
- *
- * This function is called when quit button is clicked.
- *
- */
-static void hello_button_clicked_cb(lv_event_t *e)
-{
-	//lsid_sample_app_t *app;
-
-	//app = (lsid_sample_app_t *)lv_event_get_user_data(e);
-
-	//lv_wayland_close_window(app->disp);
-
-	// Create a label
-    lv_obj_t *label = lv_label_create(lv_scr_act());
-
-    // Set the text for the label
-    lv_label_set_text(label, "Hello, Welcome To Renesas QCS Studio!");
-
-    // Set position (optional, default is top-left corner)
-    lv_obj_align(label, LV_ALIGN_CENTER, 20, 190);
-
-}
-
-/** Create a quit button
- *
- * The button is used when fullscreen mode is enabled.
- *
- */
-static int32_t create_hello_button(lsid_sample_app_t *app, lv_obj_t *obj)
-{
-	lv_obj_t *imgbtn;
-
-	imgbtn = lv_imgbtn_create(obj);
-	if (imgbtn == NULL) {
-		fprintf(stderr, "ERROR!! lv_imgbtn_create() failed.\n");
-		return -1;
-	}
-	if (app->imgdsp_scr == obj)
-		app->quit_btn = imgbtn;	/* quit button in the image file display screen */
-
-	lv_imgbtn_set_src(imgbtn, LV_IMGBTN_STATE_RELEASED, NULL, &LSID_1_btn_hello, NULL);
-
-	lv_obj_add_event_cb(imgbtn, hello_button_clicked_cb, LV_EVENT_CLICKED, app);
-	lv_obj_set_size(imgbtn, 256, 144);
-	lv_obj_align(imgbtn, LV_ALIGN_TOP_RIGHT, 20, 20);
-
-	return 0;
-}
-
 
 /** Quit button callback
  *
@@ -412,8 +358,5 @@ void lsid_sample_app_quit(void)
 	/* Release memory for GUI screen */
 	free(app);
 }
-
-
-
 
 
